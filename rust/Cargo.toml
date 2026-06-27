@@ -1,6 +1,6 @@
 [package]
 name = "notary-public"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 description = "The licensing notary: distribute any SPDX license, notarize a project's LICENSE against the canonical text, and gate your own packages with offline signed registration. Rust client SDK + `notary` CLI."
 license = "BUSL-1.1"

@@ -1,6 +1,6 @@
 {
   "name": "notary-public",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The licensing notary: distribute any SPDX license, notarize a project's LICENSE against the canonical text, and gate your own packages with offline signed registration. Deployment identity + license attestation.",
   "license": "BUSL-1.1",
   "main": "index.js",
