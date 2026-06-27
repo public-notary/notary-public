@@ -1,0 +1,19 @@
+{
+  "product": "nedb-engine",
+  "org": "Interchained LLC",
+  "email": "dev@interchained.org",
+  "domain": "interchained.org",
+  "license_state": "approved",
+  "license_type": "BUSL-commercial-grant",
+  "install_id": "inst_fixture",
+  "org_id": "org_fixture",
+  "issued_at": "2026-06-27T00:00:00.000Z",
+  "expires_at": null,
+  "features": {
+    "engine": true,
+    "studio": true,
+    "redis_wrap": true,
+    "production": true
+  },
+  "signature": "TqdI64nV+bd0PNB36gXu1aqflPoSTbDtnCohqHQa3OeMoy3jBuf0IzmoOTif9ZuU+69mGojeA2xPhU1BhV6lAg=="
+}

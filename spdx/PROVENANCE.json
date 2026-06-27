@@ -1,0 +1,24 @@
+{
+  "source": "SPDX License List Data",
+  "repo": "https://github.com/spdx/license-list-data",
+  "commit": "421fbabbe80c94c58c12316af1bc6a2dca2362bc",
+  "licenseListVersion": "3dfd9aa",
+  "releaseDate": "2026-05-28T00:00:00Z",
+  "vendored": [
+    "spdx/text",
+    "spdx/json"
+  ],
+  "excluded": [
+    "rdfxml",
+    "rdfturtle",
+    "rdfnt",
+    "rdfa",
+    "jsonld",
+    "html",
+    "template",
+    "license-list-XML"
+  ],
+  "excluded_reason": "Lossless derivative serializations of the same license data; omitted for package size. text+json carry full license text + SPDX metadata for every license.",
+  "vendored_at": "2026-06-27T22:06:42.878Z",
+  "license_count": 729
+}

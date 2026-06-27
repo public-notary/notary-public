@@ -1,0 +1,16 @@
+# NEVER ship the issuer private key — only the public key is committed.
+.issuer-key.pem
+**/.issuer-key.pem
+
+# build / deps / caches
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+target/
+.DS_Store
+*.log
+.nedb/

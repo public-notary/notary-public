@@ -1,0 +1,45 @@
+{
+  "name": "notary-public",
+  "version": "0.0.1",
+  "description": "The licensing notary: distribute any SPDX license, notarize a project's LICENSE against the canonical text, and gate your own packages with offline signed registration. Deployment identity + license attestation.",
+  "license": "BUSL-1.1",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "bin": {
+    "notary": "bin/cli.js",
+    "interchained-register": "bin/cli.js"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "src/",
+    "bin/",
+    "spdx/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">= 16"
+  },
+  "scripts": {
+    "test": "node test/gate.test.js && node test/notary.test.js"
+  },
+  "keywords": [
+    "license",
+    "licensing",
+    "spdx",
+    "license-list",
+    "notary",
+    "attestation",
+    "registration",
+    "busl",
+    "ed25519",
+    "offline-license",
+    "interchained",
+    "deployment-identity"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/public-notary/notary-public.git"
+  },
+  "homepage": "https://github.com/public-notary/notary-public#readme"
+}

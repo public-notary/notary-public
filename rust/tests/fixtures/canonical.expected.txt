@@ -1,0 +1,1 @@
+{"domain":"interchained.org","email":"dev@interchained.org","expires_at":null,"features":{"engine":true,"production":true,"redis_wrap":true,"studio":true},"install_id":"inst_fixture","issued_at":"2026-06-27T00:00:00.000Z","license_state":"approved","license_type":"BUSL-commercial-grant","org":"Interchained LLC","org_id":"org_fixture","product":"nedb-engine"}
