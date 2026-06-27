@@ -199,6 +199,7 @@ function cmdHelp() {
     ["show <SPDX>", "print a license to stdout"],
     ["notarize <file>", "identify + attest a LICENSE file"],
     ["verify <file.json>", "verify a signed notary stamp"],
+    ["serve", "run the license authority (/v1 API)"],
   ];
   say("");
   for (const [cmd, desc] of rows) say("  " + cyan(("notary " + cmd).padEnd(31)) + dim(desc));
@@ -233,6 +234,7 @@ async function main() {
       case "show": case "cat": return cmdShow(args);
       case "notarize": case "stamp": return cmdNotarize(args);
       case "verify": return cmdVerify(args);
+      case "serve": case "server": return require("../server/app").main();
       case "version": case "--version": case "-v": return say("notary-public " + require("../package.json").version);
       default: return cmdHelp();
     }

@@ -41,5 +41,8 @@
     "type": "git",
     "url": "git+https://github.com/public-notary/notary-public.git"
   },
-  "homepage": "https://github.com/public-notary/notary-public#readme"
+  "homepage": "https://github.com/public-notary/notary-public#readme",
+  "optionalDependencies": {
+    "nedb-engine": "^2.5.0"
+  }
 }

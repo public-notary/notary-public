@@ -4,6 +4,7 @@
 
 # build / deps / caches
 node_modules/
+package-lock.json
 __pycache__/
 *.pyc
 .pytest_cache/
