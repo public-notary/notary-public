@@ -46,6 +46,16 @@ const check = async (n, f) => { try { await f(); console.log("  ok  " + n); pass
     const types = (r.json.trace || []).map((t) => t.type);
     for (const t of ["registered", "email_verified", "approved", "revoked"]) if (!types.includes(t)) throw new Error("missing " + t + " in " + types.join(","));
   });
+  await check("GET / serves the cockpit page", async () => {
+    const r = await req("GET", "/");
+    if (r.status !== 200) throw new Error(String(r.status));
+    if (typeof r.json !== "string" || !/Operations Cockpit/.test(r.json)) throw new Error("not the cockpit html");
+  });
+  await check("GET /v1/admin/metrics aggregates (live)", async () => {
+    const r = await req("GET", "/v1/admin/metrics", null, AUTH);
+    if (r.status !== 200) throw new Error(String(r.status));
+    if (typeof r.json.active !== "number" || !Array.isArray(r.json.products) || typeof r.json.registrations.today !== "number") throw new Error("bad metrics shape: " + JSON.stringify(r.json).slice(0, 120));
+  });
   server.close();
   console.log("\n" + (fail === 0 ? "ALL GREEN" : "FAILURES") + " — " + pass + " passed, " + fail + " failed");
   process.exit(fail ? 1 : 0);

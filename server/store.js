@@ -96,6 +96,28 @@ class Authority {
   licenses(state) { const rows = this._q("FROM licenses"); return state ? rows.filter((r) => r.state === state) : rows; }
   organizations() { return this._q("FROM organizations"); }
 
+  // Real operational aggregate for the cockpit dashboard (no mock data).
+  metrics() {
+    const lics = this._q("FROM licenses");
+    const byState = {}, byProduct = {};
+    let today = 0, week = 0, month = 0; const now = Date.now();
+    for (const l of lics) {
+      byState[l.state] = (byState[l.state] || 0) + 1;
+      byProduct[l.product] = (byProduct[l.product] || 0) + 1;
+      const t = Date.parse(l.created_at || "");
+      if (t) { const age = now - t; if (age < 864e5) today++; if (age < 6048e5) week++; if (age < 2592e6) month++; }
+    }
+    return {
+      active: byState["approved"] || 0,
+      pending: (byState["pending_approval"] || 0) + (byState["pending_email_verification"] || 0),
+      flagged: (byState["suspended"] || 0) + (byState["denied"] || 0),
+      registrations: { today, week, month },
+      orgs: this._q("FROM organizations").length,
+      total: lics.length,
+      products: Object.entries(byProduct).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count),
+    };
+  }
+
   _latestEventId(license_id) {
     const rows = this._q(`FROM events WHERE license_id = "${license_id}"`);
     rows.sort((a, b) => (b._seq || 0) - (a._seq || 0));

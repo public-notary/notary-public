@@ -3,7 +3,10 @@
 // Zero framework deps (built-in http). Admin routes require a bearer token when
 // NOTARY_ADMIN_TOKEN is set.
 const http = require("http");
+const fs = require("fs");
+const path = require("path");
 const { Authority } = require("./store");
+const COCKPIT = path.join(__dirname, "public", "index.html");
 
 const send = (res, code, obj) => { res.writeHead(code, { "content-type": "application/json" }); res.end(JSON.stringify(obj)); };
 const body = (req) => new Promise((resolve) => {
@@ -21,6 +24,10 @@ function createServer({ dataDir, adminToken } = {}) {
         return send(res, 401, { error: "admin authorization required" });
       }
       if (p === "/v1/health") return send(res, 200, { ok: true, service: "notary-public", engine: "nedb", causal: true });
+      if (m === "GET" && (p === "/" || p === "/cockpit" || p === "/index.html")) {
+        try { const html = fs.readFileSync(COCKPIT, "utf8"); res.writeHead(200, { "content-type": "text/html; charset=utf-8" }); return res.end(html); }
+        catch { return send(res, 500, { error: "cockpit asset missing" }); }
+      }
 
       if (m === "POST" && p === "/v1/register") {
         const b = await body(req);
@@ -45,6 +52,7 @@ function createServer({ dataDir, adminToken } = {}) {
       if (m === "GET" && p === "/v1/admin/requests") return send(res, 200, { requests: A.licenses(url.searchParams.get("state")) });
       if (m === "GET" && p === "/v1/admin/licenses") return send(res, 200, { licenses: A.licenses() });
       if (m === "GET" && p === "/v1/admin/orgs") return send(res, 200, { orgs: A.organizations() });
+      if (m === "GET" && p === "/v1/admin/metrics") return send(res, 200, A.metrics());
 
       return send(res, 404, { error: "not found" });
     } catch (e) { return send(res, 500, { error: e.message }); }
